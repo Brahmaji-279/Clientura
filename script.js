@@ -133,7 +133,7 @@ const birdsEffect=VANTA.BIRDS({
   minWidth: 200.00,
   scale: 1.00,
   scaleMobile: 1.00,
-  color1: 0xfff00,
+  color1: 0xf59e0b,
   color2: 0xff0800,
   birdSize: 1.2,
   wingSpan: 40.00,
