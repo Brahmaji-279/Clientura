@@ -71,9 +71,8 @@ const BASE_ROTATION = 0;
 function animate() {
   requestAnimationFrame(animate);
 
-  
-    targetRotation += 0.02;
-   currentRotation += (targetRotation - currentRotation) * 0.1;
+  targetRotation += 0.02;
+  currentRotation += (targetRotation - currentRotation) * 0.1;
 
   globe.rotation.y = currentRotation;
   textSphere.rotation.y = currentRotation;
@@ -124,9 +123,43 @@ const birdsEffect=VANTA.BIRDS({
   minWidth: 200.00,
   scale: 1.00,
   scaleMobile: 1.00,
-  color1: 0xf59e0b,
+  color1:0xf59e0b,
   color2: 0xff0800,
   birdSize: 1.2,
   wingSpan: 40.00,
   separation: 63.00
 })
+
+document.querySelectorAll(".card").forEach(card => {
+  card.addEventListener("mousemove", e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    card.style.transform = `
+      translate(${x * 0.05}px, ${y * 0.05}px)
+      scale(1.05)
+    `;
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "translate(0,0) scale(1)";
+  });
+});
+
+
+const cursor = document.createElement("div");
+cursor.className = "cursor";
+document.body.appendChild(cursor);
+
+document.addEventListener("mousemove", e => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+});
+
+document.querySelectorAll(".card, button, a").forEach(el => {
+  el.addEventListener("mouseenter", () => cursor.style.transform = "scale(2)");
+  el.addEventListener("mouseleave", () => cursor.style.transform = "scale(1)");
+});
+
+
