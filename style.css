@@ -31,7 +31,7 @@
   letter-spacing: 1px;
 }
 
-.wave-x:hover span {
+.wave-x span {
   display: inline-block;
   font-size: 30px;
   font-weight: 700;
