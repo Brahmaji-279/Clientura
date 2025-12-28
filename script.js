@@ -79,9 +79,8 @@ canvas.addEventListener("mouseleave", () => {
 function animate() {
   requestAnimationFrame(animate);
 
-  if (isHovering) {
+  
     targetRotation += 0.02;
-  } 
    currentRotation += (targetRotation - currentRotation) * 0.1;
 
   globe.rotation.y = currentRotation;
