@@ -68,14 +68,6 @@ let targetRotation = 0;
 
 const BASE_ROTATION = 0;
 
-canvas.addEventListener("mouseenter", () => {
-  isHovering = true;
-});
-
-canvas.addEventListener("mouseleave", () => {
-  isHovering = false;
-});
-
 function animate() {
   requestAnimationFrame(animate);
 
