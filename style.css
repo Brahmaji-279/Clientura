@@ -26,7 +26,7 @@
   transition: color 0.3s ease, letter-spacing 0.3s ease;
 }
 
-.logo:hover strong {
+.logo strong {
   color: #f59e0b;
   letter-spacing: 1px;
 }
@@ -39,7 +39,7 @@
   animation: waveX 1.6s ease-in-out infinite;
 }
 
-/* delay per letter */
+/* wave animation delays of logo text */
 .wave-x span:nth-child(1) { animation-delay: 0s; }
 .wave-x span:nth-child(2) { animation-delay: 0.1s; }
 .wave-x span:nth-child(3) { animation-delay: 0.2s; }
@@ -55,7 +55,7 @@
     transform: translateX(0);
   }
   50% {
-    transform: translateX(10px);
+    transform: translateX(20px);
   }
 }
 
@@ -133,7 +133,7 @@
       background:radial-gradient(circle at top,#1e293b,#020617);
       box-shadow:0 0 70px rgba(245,158,11,.4);
       overflow:hidden;
-      cursor:grab;
+      cursor:grabbing;
     }
 
     #globeCanvas{
@@ -145,7 +145,11 @@
     section{padding:120px 8%}
     .section-dark{background:#0f172a}
 
-    h2{text-align:center;font-size:40px;margin-bottom:60px}
+    h2{
+      text-align:center;
+      font-size:40px;
+      margin-bottom:60px
+    }
 
     .grid{
       display:grid;
@@ -156,7 +160,7 @@
     .card{
       background:#1e293b;
       padding:24px;
-      border-radius:18px;
+      border-radius:50px;
       transition:.3s;
     }
 
@@ -165,7 +169,10 @@
       box-shadow:0 0 30px rgba(245,158,11,.35);
     }
 
-    .card h3{color:#f59e0b;margin-bottom:10px}
+    .card h3{
+      color:#f59e0b;
+      margin-bottom:10px
+    }
 
     footer{
       text-align:center;
@@ -199,7 +206,7 @@
      width: 100%;
     }
     .hero-visual:active{
-        cursor:grabbing;
+        cursor:none;
     }
     /* Scroll reveal animation */
     .reveal {
@@ -238,5 +245,192 @@
     }
           
 
+.service-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: 
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* glowing animated border */
+.service-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: 18px;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(245,158,11,0.6),
+    transparent
+  );
+  opacity: 0;
+  filter: blur(12px);
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+/* hover effects */
+.service-card:hover {
+  transform: translateY(-14px) scale(1.03);
+  box-shadow: 0 30px 80px rgba(245,158,11,0.35);
+}
+
+.service-card:hover .service-glow {
+  opacity: 1;
+}
+
+/* icon animation */
+.service-icon {
+  font-size: 42px;
+  margin-bottom: 12px;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.service-card:hover .service-icon {
+  transform: rotate(-8deg) scale(1.2);
+  filter: drop-shadow(0 0 12px currentColor);
+}
+
+/* floating idle animation */
+@keyframes floatSoft {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
+.service-card {
+  animation: floatSoft 6s ease-in-out infinite;
+}
+
+/* stagger effect */
+.service-card:nth-child(2n) {
+  animation-delay: 1.5s;
+}
+.service-card:nth-child(3n) {
+  animation-delay: 3s;
+}
+.card {
+  backdrop-filter: blur(16px);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+}
 
 
+
+@keyframes borderMove {
+  0% { background-position: 0%; }
+  100% { background-position: 300%; }
+}
+
+h2::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  margin: 20px auto 0;
+  background: linear-gradient(90deg,#f59e0b,#facc15);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: 0.5s;
+}
+
+section:hover h2::after {
+  transform: scaleX(1);
+}
+
+
+
+.card {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+
+.service-icon {
+  position: relative;
+  font-size: 36px;
+  transition: 0.4s ease;
+}
+
+.card:hover .service-icon {
+  transform: scale(1.25);
+  filter: drop-shadow(0 0 14px currentColor);
+}
+
+.service-icon::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 100%;
+  border: 1px solid currentColor;
+  opacity: 0;
+  animation: pulse 2s infinite;
+}
+
+.card:hover .service-icon::after {
+  opacity: 0.6;
+}
+
+@keyframes pulse {
+  0% { 
+    transform: scale(0.6); 
+    opacity: 0.6; 
+  }
+  100% {
+     transform: scale(1.6); 
+     opacity: 0; 
+    }
+}
+
+@keyframes idleFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.card {
+  animation: idleFloat 6s ease-in-out infinite;
+}
+
+
+.card p {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.card::after {
+  content: "Click to explore →";
+  position: absolute;
+  bottom: 20px;
+  left: 24px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 0.3s;
+  color: #f59e0b;
+}
+
+.card:hover p {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.card:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cursor {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #f59e0b;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transition: transform 0.15s ease, background 0.2s;
+}
